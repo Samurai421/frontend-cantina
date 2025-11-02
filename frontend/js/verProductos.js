@@ -30,7 +30,7 @@ function mostrarProductos(productos) {
                                 const imagenSrc = p.imagen
                                     ? (p.imagen.startsWith('http')
                                         ? p.imagen
-                                        : `http://localhost:3000${p.imagen}`)
+                                        : `https://backend-cantina.onrender.com${p.imagen}`)
                                     : 'https://via.placeholder.com/300x300?text=Sin+imagen';
 
                                 return `

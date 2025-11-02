@@ -37,7 +37,7 @@ function mostrarProductos(productos) {
         <img src="${p.imagen 
           ? (p.imagen.startsWith('http') 
               ? p.imagen 
-              : `http://localhost:3000${p.imagen}`)
+              : `https://backend-cantina.onrender.com${p.imagen}`)
           : 'https://via.placeholder.com/200'}" 
           alt="${p.nombre}">
 
