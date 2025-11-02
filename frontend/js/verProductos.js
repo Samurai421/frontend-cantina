@@ -1,5 +1,5 @@
 // verProductos.js
-const API_URL = 'http://localhost:3000/productos';
+const API_URL = 'https://backend-cantina.onrender.com/productos';
 const itemsContainer = document.getElementById('items-container');
 const searchInput = document.getElementById('searchInput');
 
