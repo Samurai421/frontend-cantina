@@ -49,7 +49,7 @@ async function login() {
 
   // Si es usuario común
   try {
-    const res = await fetch('http://localhost:3000/usuarios/login', {
+    const res = await fetch('https://backend-cantina.onrender.com/usuarios/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user, pass })
