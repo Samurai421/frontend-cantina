@@ -52,7 +52,7 @@ async function login() {
     const res = await fetch('https://backend-cantina.onrender.com/usuarios/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nameuser, pass })
+      body: JSON.stringify({ nameuser: user, pass })
     });
 
     const data = await res.json();
@@ -88,7 +88,7 @@ async function registrar() {
         const res = await fetch('https://backend-cantina.onrender.com/usuarios', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nameuser, pass, email })
+            body: JSON.stringify({ nameuser: user, pass, email })
         });
 
         if (!res.ok) {
