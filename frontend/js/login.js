@@ -1,13 +1,13 @@
 // Credenciales de admin (fijas por ahora)
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = '1234';
+const ADMIN_nameuser = 'admin';
+const ADMIN_PASS = 'admin1234';
 
 
 
 // 🧹 Limpiar credenciales anteriores al entrar al login
 document.addEventListener('DOMContentLoaded', () => {
   localStorage.removeItem('adminLogged');
-  localStorage.removeItem('user');
+  localStorage.removeItem('nameuser');
   localStorage.removeItem('email');
   localStorage.removeItem('token'); // por si en un futuro usás JWT u otro tipo
   localStorage.clear();
@@ -31,18 +31,18 @@ function mostrarLogin() {
 }
 
 async function login() {
-  const user = document.getElementById("loginUser").value.trim();
+  const nameuser = document.getElementById("loginnameuser").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
 
-  if (!user || !pass) {
+  if (!nameuser || !pass) {
     alert("Por favor completa todos los campos.");
     return;
   }
 
   // Si es admin
-  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+  if (nameuser === ADMIN_nameuser && pass === ADMIN_PASS) {
     localStorage.setItem('adminLogged', 'true');
-    alert(`Bienvenido, ${user} (Admin)`);
+    alert(`Bienvenido, ${nameuser} (Admin)`);
     window.location.replace("admin.html");
     return;
   }
@@ -52,7 +52,7 @@ async function login() {
     const res = await fetch('https://backend-cantina.onrender.com/usuarios/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user, pass })
+      body: JSON.stringify({ nameuser, pass })
     });
 
     const data = await res.json();
@@ -60,11 +60,11 @@ async function login() {
     if (!res.ok) throw new Error(data.error || 'Error en el login');
 
     // ✅ Guardamos sesión del usuario
-    localStorage.setItem('user', data.user);
+    localStorage.setItem('nameuser', data.nameuser);
     localStorage.setItem('email', data.email);
-    localStorage.setItem('userLogged', 'true');
+    localStorage.setItem('nameuserLogged', 'true');
 
-    alert(`Bienvenido ${data.user}`);
+    alert(`Bienvenido ${data.nameuser}`);
     window.location.replace('home.html'); // o index.html, según tu estructura
   } catch (err) {
     console.error('Error en login:', err);
@@ -75,11 +75,11 @@ async function login() {
 
 // ✍️ Registro de usuarios (DB)
 async function registrar() {
-    const user = document.getElementById("regUser").value.trim();
+    const nameuser = document.getElementById("regnameuser").value.trim();
     const pass = document.getElementById("regPass").value.trim();
     const email = document.getElementById("regEmail").value.trim();
 
-    if (!user || !pass || !email) {
+    if (!nameuser || !pass || !email) {
         alert("Completa todos los campos para registrarte.");
         return;
     }
@@ -88,7 +88,7 @@ async function registrar() {
         const res = await fetch('https://backend-cantina.onrender.com/usuarios', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user, pass, email })
+            body: JSON.stringify({ nameuser, pass, email })
         });
 
         if (!res.ok) {
@@ -96,7 +96,7 @@ async function registrar() {
             throw new Error(err.error || 'Error al registrar');
         }
 
-        alert(`Usuario ${user} registrado con éxito`);
+        alert(`Usuario ${nameuser} registrado con éxito`);
         mostrarLogin();
     } catch (err) {
         alert(err.message);
@@ -106,7 +106,7 @@ async function registrar() {
 // 🔒 Logout
 function logout() {
     localStorage.removeItem('adminLogged');
-    localStorage.removeItem('userLogged');
+    localStorage.removeItem('nameuserLogged');
     window.location.replace('login.html');
 }
 
@@ -120,7 +120,7 @@ function protegerAdmin() {
 
 // ✅ Protección de páginas de usuario
 function protegerUsuario() {
-    if (!localStorage.getItem('userLogged')) {
+    if (!localStorage.getItem('nameuserLogged')) {
         alert('Debes iniciar sesión para acceder');
         window.location.replace('login.html');
     }
