@@ -1,5 +1,5 @@
 // Credenciales de admin (fijas por ahora)
-const ADMIN_nameuser = 'admin';
+const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'admin1234';
 
 
@@ -7,7 +7,7 @@ const ADMIN_PASS = 'admin1234';
 // 🧹 Limpiar credenciales anteriores al entrar al login
 document.addEventListener('DOMContentLoaded', () => {
   localStorage.removeItem('adminLogged');
-  localStorage.removeItem('nameuser');
+  localStorage.removeItem('user');
   localStorage.removeItem('email');
   localStorage.removeItem('token'); // por si en un futuro usás JWT u otro tipo
   localStorage.clear();
@@ -31,18 +31,18 @@ function mostrarLogin() {
 }
 
 async function login() {
-  const nameuser = document.getElementById("loginnameuser").value.trim();
+  const user = document.getElementById("loginUser").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
 
-  if (!nameuser || !pass) {
+  if (!user || !pass) {
     alert("Por favor completa todos los campos.");
     return;
   }
 
   // Si es admin
-  if (nameuser === ADMIN_nameuser && pass === ADMIN_PASS) {
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
     localStorage.setItem('adminLogged', 'true');
-    alert(`Bienvenido, ${nameuser} (Admin)`);
+    alert(`Bienvenido, ${user} (Admin)`);
     window.location.replace("admin.html");
     return;
   }
@@ -60,11 +60,11 @@ async function login() {
     if (!res.ok) throw new Error(data.error || 'Error en el login');
 
     // ✅ Guardamos sesión del usuario
-    localStorage.setItem('nameuser', data.nameuser);
+    localStorage.setItem('user', data.user);
     localStorage.setItem('email', data.email);
-    localStorage.setItem('nameuserLogged', 'true');
+    localStorage.setItem('userLogged', 'true');
 
-    alert(`Bienvenido ${data.nameuser}`);
+    alert(`Bienvenido ${data.user}`);
     window.location.replace('home.html'); // o index.html, según tu estructura
   } catch (err) {
     console.error('Error en login:', err);
@@ -75,11 +75,11 @@ async function login() {
 
 // ✍️ Registro de usuarios (DB)
 async function registrar() {
-    const nameuser = document.getElementById("regnameuser").value.trim();
+    const user = document.getElementById("regUser").value.trim();
     const pass = document.getElementById("regPass").value.trim();
     const email = document.getElementById("regEmail").value.trim();
 
-    if (!nameuser || !pass || !email) {
+    if (!user || !pass || !email) {
         alert("Completa todos los campos para registrarte.");
         return;
     }
@@ -96,7 +96,7 @@ async function registrar() {
             throw new Error(err.error || 'Error al registrar');
         }
 
-        alert(`Usuario ${nameuser} registrado con éxito`);
+        alert(`Usuario ${user} registrado con éxito`);
         mostrarLogin();
     } catch (err) {
         alert(err.message);
@@ -106,7 +106,7 @@ async function registrar() {
 // 🔒 Logout
 function logout() {
     localStorage.removeItem('adminLogged');
-    localStorage.removeItem('nameuserLogged');
+    localStorage.removeItem('userLogged');
     window.location.replace('login.html');
 }
 
@@ -120,7 +120,7 @@ function protegerAdmin() {
 
 // ✅ Protección de páginas de usuario
 function protegerUsuario() {
-    if (!localStorage.getItem('nameuserLogged')) {
+    if (!localStorage.getItem('userLogged')) {
         alert('Debes iniciar sesión para acceder');
         window.location.replace('login.html');
     }
