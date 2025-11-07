@@ -60,7 +60,7 @@ async function login() {
     if (!res.ok) throw new Error(data.error || 'Error en el login');
 
     // ✅ Guardamos sesión del usuario
-    localStorage.setItem('user', data.user);
+    localStorage.setItem('user', data.nameuser);
     localStorage.setItem('email', data.email);
     localStorage.setItem('userLogged', 'true');
 
