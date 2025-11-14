@@ -12,7 +12,7 @@ function mostrarCarrito() {
     if (carrito.length === 0) {
         mainCarritoContainer.innerHTML = `
             <div class="text-center py-5">
-                <h4>Tu carrito está vacío 🛍️</h4>
+                <h4>Tu carrito está vacío <i class="fa-solid fa-store"></i></h4>
                 <a href="home.html" class="btn btn-primary rounded-pill mt-3">Volver a la tienda</a>
             </div>
         `;
@@ -31,7 +31,7 @@ function mostrarCarrito() {
 
                 <div class="carrito-cantidad d-flex align-items-center mt-2 mt-md-0">
                     <button class="btn btn-outline-secondary btn-sm me-2" 
-                            onclick="cambiarUnidades(${p.id}, -1)">➖</button>
+                            onclick="cambiarUnidades(${p.id}, -1)"><i class="fa-solid fa-minus"></i></button>
 
                     <input type="number" 
                            min="1" 
@@ -42,7 +42,7 @@ function mostrarCarrito() {
                            onchange="cambiarCantidadManual(${p.id}, this.value)">
 
                     <button class="btn btn-outline-secondary btn-sm ms-2" 
-                            onclick="cambiarUnidades(${p.id}, 1)">➕</button>
+                            onclick="cambiarUnidades(${p.id}, 1)"><i class="fa-solid fa-plus"></i></button>
                 </div>
 
                 <div class="carrito-precio mt-2 mt-md-0 text-center">
