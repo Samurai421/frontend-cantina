@@ -45,8 +45,8 @@ function mostrarProductos(productos) {
         <p class="mb-1">$${p.precio}</p>
         <p class="text-muted">Stock: ${p.cantidad}</p>
         <div class="admin-buttons mt-2">
-          <button class="btn-editar" onclick="editarProducto(${p.id})">✏️</button>
-          <button class="btn-borrar" onclick="borrarProducto(${p.id})">🗑️</button>
+          <button class="btn-editar" onclick="editarProducto(${p.id})"><i class="fa-solid fa-pencil"></i></button>
+          <button class="btn-borrar" onclick="borrarProducto(${p.id})"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>
     </div>
